@@ -1,0 +1,32 @@
+# Name to show on GH Website
+name: Deploy to Pages
+
+# Event Trigger (At least one)
+on:
+    workflow_dispatch:
+        inputs:
+            name:
+                required: true
+                type: string
+                description: Enter your name
+
+env:
+    MY_PAGE_URL:  "https://github.com/Abdullah-Benomar-Shahen/gha/" # <Key>:<Value>
+
+# Jobs Config
+jobs:
+    embed_user_input:
+        name: User Name Entry
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print something
+              run: echo welcome ${{ inputs.name }}.
+    
+    display_env:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get Env value
+              run: echo My File is at $MY_PAGE_URL
+            - name: Show Secrets
+              run: echo ${{ secrets.MY_SEC_ID }}
+        
